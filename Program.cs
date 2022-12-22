@@ -7,6 +7,9 @@ using IdentityModel.Client;
 using System.Linq;
 using System;
 using System.Net;
+using System.Diagnostics;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
 namespace ProcessSharePoint
 {
@@ -39,6 +42,31 @@ namespace ProcessSharePoint
                 new KeyValuePair<string, string>("resource", resource),
                 new KeyValuePair<string, string>("tenant", Tenant),
             };
+
+
+
+            /****************************************Graph Client***********************************************/
+            
+
+            /***************************************************************************************/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             HttpContent content = new FormUrlEncodedContent(keyValues);
 
