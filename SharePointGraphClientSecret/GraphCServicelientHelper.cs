@@ -32,7 +32,9 @@ namespace SharePointGraphClientSecret
             // which uses the MSAL client to obtain an app-only access token to Microsoft Graph,
             // and inserts this access token in the Authorization header of each API request. 
 
-            return new GraphServiceClient(new DelegateAuthenticationProvider(async (requestMessage) =>
+            return new GraphServiceClient(
+                
+                new DelegateAuthenticationProvider(async (requestMessage) =>
             {
 
                 // Retrieve an access token for Microsoft Graph (gets a fresh token if needed).
@@ -44,6 +46,8 @@ namespace SharePointGraphClientSecret
                 requestMessage.Headers.Authorization =
                                    new AuthenticationHeaderValue("Bearer", authResult.AccessToken);
             })
+                );
+        
         }
     }
 }
