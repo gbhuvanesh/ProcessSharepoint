@@ -23,9 +23,9 @@ namespace SharePointGraphClientSecret
 
             // Configure the MSAL client as a confidential client
             var confidentialClient = ConfidentialClientApplicationBuilder
-                            .Create("13985f93-53cb-4db8-b814-8e02a2e80e80 ")
+                            .Create("c6ec4c46-12c7-48db-b314-770081f65b4a")
              .WithAuthority($"https://login.microsoftonline.com/{tenantId}/v2.0")
-                            .WithClientSecret("qSU8Q~bA8Pqf2Zk1bjTY1zUVuwv4bxH0giRAodlX")
+                            .WithClientSecret("sfGhzJCBhlGR11oyKob7RXWaU8BDBJtVZEjTW9Ri7I4")
                             .Build();
 
             // Build the Microsoft Graph client. As the authentication provider, set an async lambda
