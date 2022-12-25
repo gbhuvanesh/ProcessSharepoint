@@ -6,9 +6,8 @@ using System.Linq;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Graph;
 using Microsoft.Graph.ExternalConnectors;
-
+using Azure.Identity;.
 namespace SharePointGraphClientSecret
 {
     internal class GraphCServicelientHelper
@@ -17,37 +16,33 @@ namespace SharePointGraphClientSecret
 
         public GraphServiceClient GetGraphClient()
         {
+            // The client credentials flow requires that you request the
+            // /.default scope, and preconfigure your permissions on the
+            // app registration in Azure. An administrator must grant consent
+            // to those permissions beforehand.
+            var scopes = new[] { "https://graph.microsoft.com/.default" };
 
-            var scopes = new string[] { "https://graph.microsoft.com/.default" };
+            // Multi-tenant apps can use "common",
+            // single-tenant apps must use the tenant ID from the Azure portal
             var tenantId = "6716eb25-dab8-4305-a4a4-ab061d87f701";
 
-            // Configure the MSAL client as a confidential client
-            var confidentialClient = ConfidentialClientApplicationBuilder
-                            .Create("c6ec4c46-12c7-48db-b314-770081f65b4a")
-             .WithAuthority($"https://login.microsoftonline.com/{tenantId}/v2.0")
-                            .WithClientSecret("sfGhzJCBhlGR11oyKob7RXWaU8BDBJtVZEjTW9Ri7I4")
-                            .Build();
+            // Values from app registration
+            var clientId = "c6ec4c46-12c7-48db-b314-770081f65b4a";
+            var clientSecret = "sfGhzJCBhlGR11oyKob7RXWaU8BDBJtVZEjTW9Ri7I4";
 
-            // Build the Microsoft Graph client. As the authentication provider, set an async lambda
-            // which uses the MSAL client to obtain an app-only access token to Microsoft Graph,
-            // and inserts this access token in the Authorization header of each API request. 
-
-            return new GraphServiceClient(
-                
-                new DelegateAuthenticationProvider(async (requestMessage) =>
+            // using Azure.Identity;
+            var options = new TokenCredentialOptions
             {
+                AuthorityHost = AzureAuthorityHosts.AzurePublicCloud
+            };
 
-                // Retrieve an access token for Microsoft Graph (gets a fresh token if needed).
-                var authResult = await confidentialClient
-                         .AcquireTokenForClient(scopes)
-                         .ExecuteAsync();
+            // https://learn.microsoft.com/dotnet/api/azure.identity.clientsecretcredential
+            var clientSecretCredential = new ClientSecretCredential(
+                tenantId, clientId, clientSecret, options);
 
-                // Add the access token in the Authorization header of the API request.
-                requestMessage.Headers.Authorization =
-                                   new AuthenticationHeaderValue("Bearer", authResult.AccessToken);
-            })
-                );
-        
+            var graphClient = new GraphServiceClient(clientSecretCredential, scopes);
+
+            return graphClient;
         }
     }
 }
