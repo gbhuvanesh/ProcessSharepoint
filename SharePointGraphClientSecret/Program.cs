@@ -8,7 +8,7 @@ var graphClient = (new GraphCServicelientHelper()).GetGraphClient();
 
 //var me = await graphClient.Me.Request().GetAsync();
 
-var siteId = await graphClient.Sites.Request().GetAsync();
+var siteId = await graphClient.Sites["root"].Request().GetAsync();
 
 Console.WriteLine("Please press any key to exit");
 Console.ReadKey();
