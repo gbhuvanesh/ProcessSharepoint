@@ -7,7 +7,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Graph.ExternalConnectors;
-using Azure.Identity;.
+using Azure.Identity;
 namespace SharePointGraphClientSecret
 {
     internal class GraphCServicelientHelper
@@ -27,8 +27,8 @@ namespace SharePointGraphClientSecret
             var tenantId = "6716eb25-dab8-4305-a4a4-ab061d87f701";
 
             // Values from app registration
-            var clientId = "c6ec4c46-12c7-48db-b314-770081f65b4a";
-            var clientSecret = "sfGhzJCBhlGR11oyKob7RXWaU8BDBJtVZEjTW9Ri7I4";
+            var clientId = "f11cfc01-4382-4b70-9996-b9494a15d133";
+            var clientSecret = "nzx8Q~iFItIcm5rfzcxu3SjpQZzNin7kUHMMhbcM";
 
             // using Azure.Identity;
             var options = new TokenCredentialOptions
