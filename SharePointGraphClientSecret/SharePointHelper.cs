@@ -20,7 +20,7 @@ namespace SharePointGraphClientSecret
             var taskDrive = graphClient.Sites[site.Id].Lists["Letter"].Request().GetAsync();
             var drive = taskDrive.GetAwaiter().GetResult();
 
-            var newFolderName = "newFolder" + DateTime.Now.ToString("yyyyMMddhhmmss");
+            var newFolderName = "newFolder" + DateTime.Now.ToString("yyyyMMddHHmmss");
 
             var newFolder = new DriveItem
             {
