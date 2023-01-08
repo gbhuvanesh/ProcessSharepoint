@@ -63,10 +63,6 @@ var driveLetter = taskDriveLetter.GetAwaiter().GetResult();
 var taskSearch = graphClient.Sites[site.Id].Lists["Letter"].Drive.Root.Children[newFolderName].Request().GetAsync();
 var searchResult = taskSearch.GetAwaiter().GetResult();
 
-
-var taskNewFolder = graphClient.Sites[site.Id].Drives[searchResult.Id].Request().GetAsync();
-var lastCreatedFolder = taskNewFolder.GetAwaiter().GetResult();
-
 Console.WriteLine($"Site Id {site.Id}");
 Console.WriteLine("Please press any key to exit");
 Console.ReadKey();
