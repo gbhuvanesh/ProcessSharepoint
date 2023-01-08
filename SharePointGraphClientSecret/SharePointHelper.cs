@@ -31,6 +31,15 @@ namespace SharePointGraphClientSecret
             CheckWhetherAFolderExists(graphClient, site, newFolderName);
             CreateANewFolder(graphClient, site, newFolder);
             GetNewlyCreatedFolderObject(graphClient, site, newFolderName);
+
+            GetTheFilesWithinAFolder(graphClient, site, newFolderName);
+        }
+
+        private void GetTheFilesWithinAFolder(GraphServiceClient graphClient, Site site, string newFolderName)
+        {
+            // This gets the folder within a speciifc Document library
+            var taskSearch = graphClient.Sites[site.Id].GetByPath($"/Letter/newFolderName/").Request().GetAsync();
+            var searchResult = taskSearch.GetAwaiter().GetResult();
         }
 
         private static void CheckWhetherAFolderExists(GraphServiceClient graphClient, Site site, string newFolderName)
