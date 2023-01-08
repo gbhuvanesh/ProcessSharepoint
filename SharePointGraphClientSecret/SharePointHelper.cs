@@ -28,6 +28,13 @@ namespace SharePointGraphClientSecret
                 Folder = new Folder()
             };
 
+            CheckWhetherAFolderExists(graphClient, site, newFolderName);
+            CreateANewFolder(graphClient, site, newFolder);
+            GetNewlyCreatedFolderObject(graphClient, site, newFolderName);
+        }
+
+        private static void CheckWhetherAFolderExists(GraphServiceClient graphClient, Site site, string newFolderName)
+        {
             /*
             //  This throws an Exception when there is no folder found under the specific Document Library
             var taskSearchBeforeCreate = graphClient.Sites[site.Id].Lists["Letter"].Drive.Root.Children[newFolderName].Request().GetAsync();
@@ -56,14 +63,20 @@ namespace SharePointGraphClientSecret
                at Program.<Main>$(String[] args) in C:\Projects2022Plus\SharePointGraphAPI\SharePointGraphClientSecret\Program.cs:line 29
 
             */
+        }
 
-            // This creates a new folder
-            var taskDriveLetter = graphClient.Sites[site.Id].Lists["Letter"].Drive.Root.Children.Request().AddAsync(newFolder);
-            var driveLetter = taskDriveLetter.GetAwaiter().GetResult();
-
+        private static void GetNewlyCreatedFolderObject(GraphServiceClient graphClient, Site site, string newFolderName)
+        {
             // This gets the folder within a speciifc Document library
             var taskSearch = graphClient.Sites[site.Id].Lists["Letter"].Drive.Root.Children[newFolderName].Request().GetAsync();
             var searchResult = taskSearch.GetAwaiter().GetResult();
+        }
+
+        private static void CreateANewFolder(GraphServiceClient graphClient, Site site, DriveItem newFolder)
+        {
+            // This creates a new folder
+            var taskDriveLetter = graphClient.Sites[site.Id].Lists["Letter"].Drive.Root.Children.Request().AddAsync(newFolder);
+            var driveLetter = taskDriveLetter.GetAwaiter().GetResult();
         }
     }
 }
