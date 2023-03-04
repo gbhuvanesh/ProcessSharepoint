@@ -6,7 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="SharePointGraphClientSecret\**" />
+    <Compile Remove="SharePoint
+             ClientSecret\**" />
     <Compile Remove="SharePointGraphClient\**" />
     <EmbeddedResource Remove="SharePointGraphClientSecret\**" />
     <EmbeddedResource Remove="SharePointGraphClient\**" />
