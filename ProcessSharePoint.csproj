@@ -6,6 +6,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="SharePointGraphClientSecret\**" />
+    <Compile Remove="SharePointGraphClient\**" />
+    <EmbeddedResource Remove="SharePointGraphClientSecret\**" />
+    <EmbeddedResource Remove="SharePointGraphClient\**" />
+    <None Remove="SharePointGraphClientSecret\**" />
+    <None Remove="SharePointGraphClient\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Azure.Identity" Version="1.8.0" />
     <PackageReference Include="IdentityModel" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.0" />
