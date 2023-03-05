@@ -16,6 +16,7 @@ var site = task.GetAwaiter().GetResult();
 
 var sharePointHelper = new SharePointHelper();
 
+await LinkToDocument.Create(graphClient, site);
 sharePointHelper.CreateNewFolderInDrive(graphClient, site);
 
 Console.WriteLine($"Site Id {site.Id}");
